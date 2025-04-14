@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px; /* Space between form and sidebar */
+        }
+        .sidebar {
+            width: 200px;
+            padding: 20px;
+            background-color: #e8f0fe;
+            border-radius: 8px;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 0 0 10px;
+            position: relative;
+        }
+        h1:hover::after {
+            content: "Heading";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 10;
+        }
+        h1:hover {
+            color: transparent; /* Hide text but keep layout */
+        }
+        .instructions {
+            background-color: #e8f0fe;
+            padding: 8px;
+            border-left: 4px solid #1e90ff;
+            font-size: 14px;
+            color: #333;
+            position: relative;
+        }
+        .instructions:hover::after {
+            content: "Instructions";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .instructions:hover {
+            color: transparent; /* Hide text but keep layout */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input:focus,
+        textarea:focus {
+            border-color: #1e90ff;
+            outline: none;
+        }
+        .body-section,
+        .id-section,
+        .sig-section,
+        .totals-section,
+        .comments-section {
+            position: relative;
+        }
+        .body-section:hover::after,
+        .id-section:hover::after,
+        .sig-section:hover::after,
+        .totals-section:hover::after,
+        .comments-section:hover::after {
+            content: attr(data-section);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .body-section:hover > *,
+        .id-section:hover > *,
+        .sig-section:hover > *,
+        .totals-section:hover > *,
+        .comments-section:hover > * {
+            opacity: 0; /* Fade child elements */
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        .totals {
+            font-weight: bold;
+            background-color: #f9f9f9;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #007bff;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Form Container (Left Side) -->
+    <div class="form-container">
+        <!-- Heading -->
+        <div class="section">
+            <h1>Order Form</h1>
+        </div>
+
+        <!-- Identification and Access -->
+        <div class="section id-section" data-section="Identification and Access">
+            <label for="customer-email">Email</label>
+            <input type="email" id="customer-email" name="customer-email" placeholder="e.g., john@example.com" required>
+        </div>
+
+        <!-- Instructions -->
+        <div class="section instructions">
+            <p>Fill all required fields. Review totals before submitting.</p>
+        </div>
+
+        <!-- Body -->
+        <div class="section body-section" data-section="Body">
+            <label for="item-name">Item Name</label>
+            <input type="text" id="item-name" name="item-name" placeholder="e.g., Blue Shirt" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g., 1" required>
+        </div>
+
+        <!-- Signature and Verification -->
+        <div class="section sig-section" data-section="Signature and Verification">
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the terms</label>
+            </div>
+        </div>
+
+        <!-- Totals -->
+        <div class="section totals-section" data-section="Totals">
+            <div class="totals">
+                <p>Total: $<span id="total-amount">0.00</span></p>
+            </div>
+        </div>
+
+        <!-- Comments -->
+        <div class="section comments-section" data-section="Comments">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" placeholder="e.g., Deliver after 5 PM"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </div>
+
+    <!-- Sidebar with Section Names (Right Side) -->
+    <div class="sidebar">
+        <h3>Form Sections</h3>
+        <ul>
+            <li>1. Heading</li>
+            <li>2. Identification and Access</li>
+            <li>3. Instructions</li>
+            <li>4. Body</li>
+            <li>5. Signature and Verification</li>
+            <li>6. Totals</li>
+            <li>7. Comments</li>
+        </ul>
+    </div>
+</body>
+</html>
